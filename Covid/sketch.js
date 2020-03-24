@@ -71,15 +71,15 @@ function CovidCountries() {
 
   for (let i = 0; i < table.getRowCount(); i++) {
     // Get the lat/lng of each meteorite 
-    const latitude = Number(table.getString(i, 'Latitude'));
-    const longitude = Number(table.getString(i, 'Longitude'));
+    const latitude = Number(table.getString(i, 'Lat'));
+    const longitude = Number(table.getString(i, 'Long_'));
 
     // if (myMap.map.getBounds().contains({lat: latitude, lng: longitude})) {
       // Transform lat/lng to pixel position
        const pos = myMap.latLngToPixel(latitude, longitude);
        ///const redalertcolor = table.Get(i,3)
 
-      if(table.get(i,3) >= 100  && table.get(i,3) <= 199)
+      if(table.get(i,7) >= 100  && table.get(i,7) <= 199)
       {
 
        //noStroke();
@@ -88,14 +88,14 @@ function CovidCountries() {
 
       }
        
-       else if (table.get(i,3) >= 200 && table.get(i,3) <= 499)
+       else if (table.get(i,7) >= 200 && table.get(i,7) <= 499)
        {
          
        fill(255,127,80);
        ellipse(pos.x,pos.y,20,20); 
        
        }
-     else if(table.get(i,3) >= 500)
+       else if (table.get(i,7) >= 500)
      {
      
        fill(255,0,0);
@@ -103,7 +103,7 @@ function CovidCountries() {
      
      }
     
-    else 
+     else if (table.get(i,7) > 1 && table.get(i,7) < 100)
     {
     
        fill(0,255,0);
@@ -121,13 +121,13 @@ function CountriesInfo()
 for (let i = 0; i < table.getRowCount(); i++) {
     
     // Get the lat/lng of each meteorite 
-    const latitude =  Number(table.getString(i, 'Latitude'));
-    const longitude = Number(table.getString(i, 'Longitude'));
+    let latitude =  Number(table.getString(i, 'Lat'));
+    let longitude = Number(table.getString(i, 'Long_'));
         
        // if (myMap.map.getBounds().contains({lat: latitude, lng: longitude})) {
       // Transform lat/lng to pixel position
      
-       const pos = myMap.latLngToPixel(latitude, longitude);
+       let pos = myMap.latLngToPixel(latitude, longitude);
 
        if(dist(mouseX,mouseY,pos.x,pos.y) <= 15 )
        {
@@ -142,7 +142,7 @@ for (let i = 0; i < table.getRowCount(); i++) {
         text("PROVINCE/STATE : " , pos.x -100 ,pos.y + 30 ); 
         textSize(15);
         fill(255,255,255);
-        text(table.get(i,0), pos.x + 20 , pos.y + 30 )
+        text(table.get(i,2), pos.x + 20 , pos.y + 30 )
 
 
         //Countries names  
@@ -151,7 +151,7 @@ for (let i = 0; i < table.getRowCount(); i++) {
         text("COUNTRY/REGION : " ,pos.x -100 ,pos.y + 60 ); 
         textSize(15);
         fill(255,255,255);
-        text(table.get(i,1), pos.x + 20 , pos.y + 60 );
+        text(table.get(i,3), pos.x + 20 , pos.y + 60 );
 
         // Shows how many people are infected
         textSize(12);
@@ -159,15 +159,15 @@ for (let i = 0; i < table.getRowCount(); i++) {
         text("CONFIRMED : " , pos.x - 100 ,pos.y + 100 ); 
         textSize(12);
         fill(255,255,255);
-        text(table.get(i,3), pos.x + 20 , pos.y + 100 );
+        text(table.get(i,7), pos.x + 20 , pos.y + 100 );
 
        // Shows the deaths in each country
         textSize(12);
         fill(255,255,255);
         text("DEATHS : " , pos.x -100 ,pos.y + 140 ); 
         textSize(12);
-        fill(255,0,0);
-        text(table.get(i,4), pos.x + 20 , pos.y + 140 );
+        fill(255,0,8);
+        text(table.get(i,8), pos.x + 20 , pos.y + 140 );
 
         // Shows how many people recovered
         textSize(12);
@@ -175,7 +175,7 @@ for (let i = 0; i < table.getRowCount(); i++) {
         text("RECOVERED :  " , pos.x -100 ,pos.y + 170 ); 
         textSize(12);
         fill(255,255,255);
-        text(table.get(i,5), pos.x + 20 , pos.y + 170 ); 
+        text(table.get(i,9), pos.x + 20 , pos.y + 170 ); 
 
       }}}
 
